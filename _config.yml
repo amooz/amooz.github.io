@@ -6,6 +6,7 @@ permalink: pretty
 exclude: ['README.*', 'LICENSE.txt']
 sass:
     style: expanded
+remote-theme: tsjensen/fuse-core
 
 incremental: true
 
