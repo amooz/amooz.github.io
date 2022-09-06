@@ -8,8 +8,6 @@ sass:
     style: expanded
 remote-theme: tsjensen/fuse-core
 
-incremental: true
-
 # CAUTION
 # When modifying this file, take care to preserve the indentation. This is YAML ...
 
