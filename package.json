@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "favicons": "node node_modules/gravatar-favicons/bin.js --email adam@mooz.ca -d /images/favicons/"
+    "favicons": "node node_modules/gravatar-favicons/bin.js --email adam@mooz.ca -d .\\images\\favicons\\"
   },
   "dependencies": {
     "gravatar-favicons": "^2.0.1"
