@@ -186,7 +186,7 @@ links:
   - publickey_gpg:
       name: GPG Key
       show: true
-      href: https://keys.openpgp.org/search?q=A05A1358B43340C3743CDE6A4B9F8B10AE5B808D
+      href: https://keys.openpgp.org/vks/v1/by-fingerprint/A05A1358B43340C3743CDE6A4B9F8B10AE5B808D
       icon: fas fa-key
 
 
