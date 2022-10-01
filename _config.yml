@@ -173,10 +173,10 @@ links:
       show: false
       href: mailto:adam@mooz.ca
       icon: fas fa-envelope
-  - publickey_ed25519:
+  - publickey:
       name: Public keys
       show: true
-      href: https://pastebin.com/QdveDdrA
+      href: https://pastebin.com/raw/QdveDdrA
       icon: fas fa-key
 
 # Extra HTML which will be displayed below the links. Keep it short. Leave empty to disable.
