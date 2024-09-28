@@ -3,6 +3,6 @@
     "favicons": "node node_modules/gravatar-favicons/bin.js --email adam@mooz.ca -d .\\images\\favicons\\"
   },
   "dependencies": {
-    "gravatar-favicons": "^2.0.1"
+    "gravatar-favicons": "^3.0.1"
   }
 }
