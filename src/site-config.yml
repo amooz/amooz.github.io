@@ -1,0 +1,22 @@
+author:
+  name: Adam Mooz
+  role: Full Stack Dev Manager
+  bio: Engineering leader with a track record of shipping products at scale. ex-OpsLevel, ex-Shopify, ex-IBM.
+  location: Canada
+
+social:
+  - id: "linkedin"
+    label: "LinkedIn"
+    href: "https://linkedin.com/in/adammooz/"
+  - id: "github"
+    label: "GitHub"
+    href: "https://github.com/amooz"
+  - id: "twitter"
+    label: "Twitter / X"
+    href: "https://twitter.com/AdamMooz"
+  - id: "email"
+    label: "Email"
+    href: "mailto:adam@mooz.ca"
+  - id: "publickeys"
+    label: "Public Keys"
+    href: "https://pastebin.com/raw/QdveDdrA"
