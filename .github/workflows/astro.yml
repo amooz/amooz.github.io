@@ -44,6 +44,13 @@ jobs:
         run: bun install
         working-directory: ${{ env.BUILD_PATH }}
 
+      - name: Inject Decap CMS app_id
+        # DECAP_APP_ID is a GitHub Actions variable (not a secret — Client IDs are public).
+        # Set it at: Settings → Secrets and variables → Actions → Variables tab → DECAP_APP_ID
+        run: |
+          sed -i "s/YOUR_GITHUB_OAUTH_APP_CLIENT_ID/${{ vars.DECAP_APP_ID }}/g" public/admin/config.yml
+        working-directory: ${{ env.BUILD_PATH }}
+
       - name: Build with Astro
         # Pass the Pages origin and base path so Astro generates correct asset URLs.
         # For a custom domain (adam.mooz.ca) the base_path will be empty.
