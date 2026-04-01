@@ -45,7 +45,7 @@ jobs:
         working-directory: ${{ env.BUILD_PATH }}
 
       - name: Inject Decap CMS app_id
-        # DECAP_APP_ID is a GitHub Actions variable (not a secret — Client IDs are public).
+        # DECAP_APP_ID is a GitHub Actions variable (not a secret — the Client ID is public).
         # Set it at: Settings → Secrets and variables → Actions → Variables tab → DECAP_APP_ID
         run: |
           sed -i "s/YOUR_GITHUB_OAUTH_APP_CLIENT_ID/${{ vars.DECAP_APP_ID }}/g" public/admin/config.yml
