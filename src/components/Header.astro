@@ -1,0 +1,103 @@
+---
+import { getSite } from "../utils/consts";
+import HeaderLink from "./HeaderLink.astro";
+
+const site = await getSite();
+import SearchModal from "./SearchModal.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<header class="site-header">
+  <nav class="h-full w-full flex items-center justify-end">
+    <button
+      id="nav-toggle"
+      aria-label="Toggle navigation"
+      aria-pressed="false"
+      class="md:hidden text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase"
+    >
+      Menu
+    </button>
+
+    <div
+      class="hidden md:flex items-center gap-2 text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase"
+    >
+      <HeaderLink href="/">Home</HeaderLink>
+      <HeaderLink href="/blog">Blog</HeaderLink>
+      <HeaderLink href="/projects">Projects</HeaderLink>
+      <HeaderLink href="/about">About</HeaderLink>
+      <HeaderLink href="/contact">Contact</HeaderLink>
+
+      <SearchModal class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase" />
+      <ThemeToggle class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase" />
+    </div>
+
+    <!-- Mobile modal menu -->
+    <div id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-hidden="true" style="display:none;" class="fixed inset-0 z-[1000] p-8 overflow-auto bg-[var(--color-paper)] text-[var(--color-ink)]">
+      <button id="mobile-close" aria-label="Close navigation" style="position:absolute;right:1rem;top:1rem;" class="text-xs 2xl:text-lg font-bold uppercase">Close</button>
+      <div class="flex flex-col gap-2 items-start text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase">
+        <HeaderLink href="/">Home</HeaderLink>
+        <HeaderLink href="/blog">Blog</HeaderLink>
+        <HeaderLink href="/projects">Projects</HeaderLink>
+        <HeaderLink href="/about">About</HeaderLink>
+        <HeaderLink href="/contact">Contact</HeaderLink>
+        <SearchModal class="text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase" />
+        <ThemeToggle class="text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase" />
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  const applyNav = (state) => {
+    const navButton = document.getElementById("nav-toggle");
+    const mobileNav = document.getElementById("mobile-nav");
+    const isOpen = state === "open";
+    document.documentElement.dataset.nav = isOpen ? "open" : "closed";
+    if (navButton) navButton.setAttribute("aria-pressed", isOpen ? "true" : "false");
+
+    if (mobileNav) {
+      mobileNav.style.display = isOpen ? "block" : "none";
+      mobileNav.setAttribute("aria-hidden", isOpen ? "false" : "true");
+
+      if (isOpen) {
+        const first = mobileNav.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+        if (first instanceof HTMLElement) first.focus();
+      } else {
+        if (navButton instanceof HTMLElement) navButton.focus();
+      }
+    }
+  };
+
+  const toggleNav = () => applyNav(document.documentElement.dataset.nav === "open" ? "closed" : "open");
+  const closeNav = () => applyNav("closed");
+
+  const on = (el, evt, handler) => { if (!el) return; el.addEventListener(evt, handler); };
+
+  applyNav("closed");
+
+  on(document.getElementById("nav-toggle"), "click", () => toggleNav());
+  on(document.getElementById("mobile-close"), "click", closeNav);
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.documentElement.dataset.nav === 'open') closeNav();
+  });
+
+  const navElement = document.querySelector("nav");
+  if (navElement) {
+    navElement.addEventListener('click', (e) => {
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      if (t.closest && t.closest('a')) closeNav();
+    });
+  }
+
+  document.addEventListener("click", (event) => {
+    if (document.documentElement.dataset.nav !== "open") return;
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const navButton = document.getElementById("nav-toggle");
+    const clickedToggle = navButton && navButton.contains(target);
+    const clickedNav = navElement && navElement.contains(target);
+    if (!clickedToggle && !clickedNav) closeNav();
+  });
+</script>

@@ -1,0 +1,97 @@
+# Decap CMS configuration for adam.mooz.ca
+# Docs: https://decapcms.org/docs/configuration-options/
+#
+# Auth: GitHub OAuth with PKCE flow — no backend server needed.
+# Before the CMS will work, you must:
+#   1. Create a GitHub OAuth App at github.com/settings/developers
+#      - Homepage URL: https://adam.mooz.ca
+#      - Callback URL: https://adam.mooz.ca/admin/
+#   2. Paste the Client ID below as `app_id`
+#
+backend:
+  name: github
+  repo: amooz/amooz.github.io
+  branch: main
+  auth_type: pkce
+  # Replace with your GitHub OAuth App Client ID (see instructions above)
+  app_id: YOUR_GITHUB_OAUTH_APP_CLIENT_ID
+
+# Where uploaded media files are stored in the repo
+media_folder: public/images/uploads
+# Public URL path for media files
+public_folder: /images/uploads
+
+collections:
+  # ──────────────────────────────────────────
+  # Blog Posts
+  # Files live at: src/content/blog/*.md
+  # ──────────────────────────────────────────
+  - name: blog
+    label: Blog Posts
+    folder: src/content/blog
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        hint: The post title — shown in listings and page <title>
+      - label: Description
+        name: description
+        widget: string
+        hint: One-sentence summary, used in meta tags and listings
+      - label: Publish Date
+        name: pubDate
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        hint: Date the post was (or will be) published
+      - label: Updated Date
+        name: updatedDate
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        required: false
+        hint: Leave blank unless you update a previously published post
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        hint: Comma-separated tags, e.g. engineering, leadership
+      - label: Body
+        name: body
+        widget: markdown
+
+  # ──────────────────────────────────────────
+  # Projects
+  # Files live at: src/content/projects/*.md
+  # ──────────────────────────────────────────
+  - name: projects
+    label: Projects
+    folder: src/content/projects
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: string
+        hint: One-sentence summary shown in the projects grid
+      - label: Date
+        name: pubDate
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+        required: false
+        hint: Optional longer description shown on the project detail page
