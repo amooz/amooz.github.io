@@ -45,12 +45,10 @@ jobs:
         working-directory: ${{ env.BUILD_PATH }}
 
       - name: Inject Decap CMS app_id
-        # DECAP_APP_ID is a GitHub repo secret containing the GitHub OAuth App Client ID.
-        # The Client ID is public by nature (it's served to the browser) but keeping it
-        # out of the repo history avoids accidental exposure and makes rotation easier.
-        # Set it at: Settings → Secrets and variables → Actions → DECAP_APP_ID
+        # DECAP_APP_ID is a GitHub Actions variable (not a secret — the Client ID is public).
+        # Set it at: Settings → Secrets and variables → Actions → Variables tab → DECAP_APP_ID
         run: |
-          sed -i "s/YOUR_GITHUB_OAUTH_APP_CLIENT_ID/${{ secrets.DECAP_APP_ID }}/g" public/admin/config.yml
+          sed -i "s/YOUR_GITHUB_OAUTH_APP_CLIENT_ID/${{ vars.DECAP_APP_ID }}/g" public/admin/config.yml
         working-directory: ${{ env.BUILD_PATH }}
 
       - name: Build with Astro
